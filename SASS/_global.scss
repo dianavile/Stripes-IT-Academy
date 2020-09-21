@@ -1,0 +1,7 @@
+/*global- universal selector: including content*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

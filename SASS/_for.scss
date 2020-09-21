@@ -1,0 +1,8 @@
+/*@for loop in SASS*/
+
+$left: 0vh;
+@for $i from 1 through 5 {
+    ul:nth-child(5n + #{$i}) {
+        left: nth-child($left, $i + 20vh);
+    }
+}

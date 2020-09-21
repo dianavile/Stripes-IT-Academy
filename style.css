@@ -1,0 +1,302 @@
+/*@use 'sass/global';
+@use 'sass/variables';
+@use 'sass/for';
+@use 'sass/mediaqueries';
+@use 'sass/mixins';
+*/
+/*universal selector: including content*/
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/*variable: Layout*/
+body {
+  font-family: "Lato", sans-serif;
+  line-height: 1.5;
+}
+
+/*variable: Colors*/
+/*parent element*/
+.stripes {
+  min-height: 100vh;
+}
+
+/*individual child element: give position, add background color and add stripe animation*/
+.stripe {
+  width: 20%;
+  min-height: 100vh;
+  position: absolute;
+  overflow: hidden;
+}
+
+.stripe:nth-child(1) {
+  left: 0;
+}
+
+.stripe:nth-child(1) .strip__content {
+  background-color: #244f75;
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+  -webkit-animation-name: stripe1;
+          animation-name: stripe1;
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.stripe:nth-child(2) {
+  left: 20vw;
+}
+
+.stripe:nth-child(2) .strip__content {
+  background-color: #60bfbf;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+  -webkit-animation-name: stripe2;
+          animation-name: stripe2;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.stripe:nth-child(3) {
+  left: 40vw;
+}
+
+.stripe:nth-child(3) .strip__content {
+  background-color: #8c4b7e;
+  -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+  -webkit-animation-name: stripe3;
+          animation-name: stripe3;
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.stripe:nth-child(4) {
+  left: 60vw;
+}
+
+.stripe:nth-child(4) .strip__content {
+  background-color: #f8bb44;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+  -webkit-animation-name: stripe4;
+          animation-name: stripe4;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.stripe:nth-child(5) {
+  left: 80vw;
+}
+
+.stripe:nth-child(5) .strip__content {
+  background-color: #f24b4b;
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+  -webkit-animation-name: stripe5;
+          animation-name: stripe5;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.strip__content {
+  /*add animation*/
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+          animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  /*add text style*/
+  font-family: "Lato", sans-serif;
+  /*add flexbox*/
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  /*add color,position & width, hight*/
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*if I leave the content empty & the position doesnt change, no margin (top or left), an extra white layer 30degrees rotation skewed will be added*/
+  /*when hover over the content, the white layer will be visible on full stripe*/
+}
+
+.strip__content::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: 0.05;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-transform: skew(30deg) scaleY(1) translate(0, 0);
+          transform: skew(30deg) scaleY(1) translate(0, 0);
+  -webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.strip__content:hover::before {
+  opacity: 0.1;
+  -webkit-transform: skew(0deg) scaleY(1) translate(0, 0);
+          transform: skew(0deg) scaleY(1) translate(0, 0);
+}
+
+/*style the content title, larger font-size and give it a font-weight*/
+.strip__content-title {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+/*media queries- small devices*/
+@media (max-width: 576px) {
+  .strip__content-title {
+    font-size: 1.5rem;
+  }
+}
+
+/*add keyframes to animate the stripes at loading page*/
+@-webkit-keyframes stripe1 {
+  0% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+    /*$transform1;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@keyframes stripe1 {
+  0% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+    /*$transform1;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@-webkit-keyframes stripe2 {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+    /*$transform2;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@keyframes stripe2 {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+    /*$transform2;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@-webkit-keyframes stripe3 {
+  0% {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+    /*$transform3;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@keyframes stripe3 {
+  0% {
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+    /*$transform3;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@-webkit-keyframes stripe4 {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+    /*$transform4;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@keyframes stripe4 {
+  0% {
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+    /*$transform4;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@-webkit-keyframes stripe5 {
+  0% {
+    -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
+    /*$transform5;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+
+@keyframes stripe5 {
+  0% {
+    -webkit-transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0);
+    /*$transform5;*/
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    /*$transform0;*/
+  }
+}
+/*# sourceMappingURL=style.css.map */
